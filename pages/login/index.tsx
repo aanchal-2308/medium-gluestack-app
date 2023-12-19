@@ -8,17 +8,20 @@ import {
   Text,
   VStack,
 } from "@gluestack-ui/themed";
-import React from "react";
-import { useUserContext } from "../../Context/UserContext";
+import React, { useContext, useEffect } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function login() {
   const session = useSession();
+  const router = useRouter();
+  const { login, currentUser } = useContext(AuthContext);
 
-  const { login, user } = useUserContext();
-  if (session?.data?.user) login(session?.data?.user?.name);
-
-  console.log(user, "user");
+  if (session?.data?.user && !currentUser) {
+    login(session?.data?.user?.name);
+    router.push("/");
+  }
 
   return (
     <Box
@@ -28,11 +31,11 @@ export default function login() {
       justifyContent="center"
       alignItems="center"
     >
-      <VStack space="md">
-        <Text fontSize={20} fontWeight="600" color="$black">
-          Login with User Name
-        </Text>
-        <Input
+      <VStack space="md" display="flex" alignItems="center">
+        {/* <Text fontSize={20} fontWeight="600" color="$black" mb={30}>
+          Login
+        </Text> */}
+        {/* <Input
           variant="outline"
           size="md"
           isDisabled={false}
@@ -40,7 +43,7 @@ export default function login() {
           isReadOnly={false}
         >
           <InputField placeholder="Enter user name" />
-        </Input>
+        </Input> */}
 
         <Button
           size="md"
@@ -51,7 +54,7 @@ export default function login() {
           bgColor="$black"
           onPress={() => signIn("google")}
         >
-          <ButtonText>Login </ButtonText>
+          <ButtonText>Login with Google</ButtonText>
         </Button>
       </VStack>
     </Box>
