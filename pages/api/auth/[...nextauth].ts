@@ -13,21 +13,6 @@ const authOptions = (req: any, res: any) => ({
   session: { jwt: true },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    // async redirect({ url, baseUrl }: any) {
-    //   // Allows relative callback URLs
-    //   // if (url.startsWith("/")) {
-    //   //   console.log(" i am dgefrde");
-
-    //   //   return `${baseUrl}${url}`;
-    //   // }
-    //   // // Allows callback URLs on the same origin
-    //   // else if (new URL(url).origin === baseUrl) {
-    //   //   console.log(" i am dgefrde 2");
-    //   //   return url;
-    //   // }
-    //   return baseUrl;
-    // },
-
     async jwt({ token, user, account }: any) {
       if (account) {
         token.accessToken = account.access_token;

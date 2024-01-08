@@ -41,8 +41,6 @@ function TopNavBar() {
     setConfirmationModalIsOpen(false);
   };
   const logoutClick = async () => {
-    console.log("i am here");
-
     const data = await POST("/api/logout", {});
 
     if (data.success) {
