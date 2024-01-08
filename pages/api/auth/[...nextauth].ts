@@ -1,7 +1,8 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { setCookie } from "nookies";
 
-export const authOptions = {
+const authOptions = (req: any, res: any) => ({
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
@@ -13,21 +14,18 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     // async redirect({ url, baseUrl }: any) {
-    //   console.log(url, 'url')
-    //   console.log(baseUrl, 'baseUrl')
-
     //   // Allows relative callback URLs
-    //   if (url.startsWith('/')) {
-    //     console.log(' i am dgefrde')
+    //   // if (url.startsWith("/")) {
+    //   //   console.log(" i am dgefrde");
 
-    //     return `${baseUrl}${url}`
-    //   }
-    //   // Allows callback URLs on the same origin
-    //   else if (new URL(url).origin === baseUrl) {
-    //     console.log(' i am dgefrde 2')
-    //     return url
-    //   }
-    //   return baseUrl
+    //   //   return `${baseUrl}${url}`;
+    //   // }
+    //   // // Allows callback URLs on the same origin
+    //   // else if (new URL(url).origin === baseUrl) {
+    //   //   console.log(" i am dgefrde 2");
+    //   //   return url;
+    //   // }
+    //   return baseUrl;
     // },
 
     async jwt({ token, user, account }: any) {
@@ -40,9 +38,17 @@ export const authOptions = {
     async session({ session, token, user }: any) {
       session.user = token.user;
       session.accessToken = token.accessToken;
+      setCookie({ res }, "medium_login_session", token.accessToken, {
+        maxAge: token.exp,
+        path: "/",
+        httpOnly: true,
+      });
       return session;
     },
   },
   // ...add more providers here
+});
+
+export default (req: any, res: any) => {
+  return NextAuth(req, res, authOptions(req, res));
 };
-export default NextAuth(authOptions);

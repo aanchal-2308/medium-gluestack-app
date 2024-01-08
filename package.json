@@ -12,6 +12,10 @@
   },
   "dependencies": {
     "@expo/html-elements": "latest",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@gluestack-style/react": "^1.0.29",
     "@gluestack-ui/config": "^1.0.8",
     "@gluestack-ui/themed": "^1.0.25",
@@ -20,6 +24,7 @@
     "mongodb": "^6.3.0",
     "next": "^13.5.4",
     "next-auth": "^4.24.5",
+    "nookies": "^2.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native-svg": "^13.4.0",
@@ -27,12 +32,11 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.23.3",
-    "@storybook/addon-react-native-web": "^0.0.21",
-    "babel-plugin-react-native-web": "^0.19.9",
     "@storybook/addon-essentials": "^7.6.5",
     "@storybook/addon-interactions": "^7.6.5",
     "@storybook/addon-links": "^7.6.5",
     "@storybook/addon-onboarding": "^1.0.10",
+    "@storybook/addon-react-native-web": "^0.0.21",
     "@storybook/blocks": "^7.6.5",
     "@storybook/nextjs": "^7.6.5",
     "@storybook/react": "^7.6.5",
@@ -41,6 +45,7 @@
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "@types/react-native": "^0.72.5",
+    "babel-plugin-react-native-web": "^0.19.9",
     "storybook": "^7.6.5",
     "typescript": "5.1.6"
   }
